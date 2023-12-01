@@ -11,7 +11,6 @@ spec:
       targetPort: 2181
   selector:
     app: zookeeper
-  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
