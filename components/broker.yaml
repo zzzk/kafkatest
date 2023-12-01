@@ -4,16 +4,49 @@ metadata:
   name: kafka
   labels:
     app: kafka
-services:
-  zookeeper:
-    restart: always
-    image: confluentinc/cp-zookeeper:7.5.2
-    hostname: zookeeper
-    container_name: zookeeper
-    ports:
-      - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-      ZOOKEEPER_ADMIN_ENABLE_SERVER: 'false'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka
+  labels:
+    app: kafka
+spec:
+  ports:
+    - name: zk
+      port: 2181
+      targetPort: 2181
+  selector:
+    app: kafka
+  type: LoadBalancer
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+        - name: zookeeper
+          image: confluentinc/cp-zookeeper:7.5.2
+          args: ["start-dev"]
+          env:
+            - name: ZOOKEEPER_CLIENT_PORT
+              value: "2181"
+            - name: ZOOKEEPER_TICK_TIME
+              value: "2000"
+            - name: ZOOKEEPER_ADMIN_ENABLE_SERVER
+              value: "false"
+          ports:
+            - name: zk
+              containerPort: 2181
+          readinessProbe:
+            httpGet:
+              path: /realms/master
+              port: 8080
+
 
