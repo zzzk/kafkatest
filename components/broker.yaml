@@ -4,13 +4,6 @@ metadata:
   name: zookeeper
   labels:
     app: zookeeper
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: zookeeper
-  labels:
-    app: zookeeper
 spec:
   ports:
     - name: zk
@@ -19,7 +12,13 @@ spec:
   selector:
     app: zookeeper
   type: LoadBalancer
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper
+  labels:
+    app: zookeeper
 spec:
   replicas: 1
   selector:
