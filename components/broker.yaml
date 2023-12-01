@@ -43,6 +43,8 @@ spec:
               value: "PLAINTEXT://localhost:9092"
             - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
               value: "PLAINTEXT:PLAINTEXT"
+            - name: KAFKA_METRIC_REPORTERS
+              value: "PLAINTEXT:io.confluent.metrics.reporter.ConfluentMetricsReporter"
             - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
               value: "1"
             - name: KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS
@@ -55,6 +57,14 @@ spec:
               value: "1"
             - name: KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR
               value: "1"
+            - name: CONFLUENT_METRICS_ENABLE
+              value: "false"
+            - name: CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS
+              value: "1"
+            - name: CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS
+              value: "broker:9092"
+            - name: CONFLUENT_SUPPORT_CUSTOMER_ID
+              value: "anonymous"
           ports:
             - name: broker
               containerPort: 9092
