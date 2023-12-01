@@ -32,7 +32,6 @@ spec:
       containers:
         - name: zookeeper
           image: confluentinc/cp-zookeeper:7.5.2
-          args: ["start-dev"]
           env:
             - name: ZOOKEEPER_CLIENT_PORT
               value: "2181"
