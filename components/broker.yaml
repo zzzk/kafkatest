@@ -1,34 +1,34 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kafka
+  name: zookeeper
   labels:
-    app: kafka
+    app: zookeeper
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kafka
+  name: zookeeper
   labels:
-    app: kafka
+    app: zookeeper
 spec:
   ports:
     - name: zk
       port: 2181
       targetPort: 2181
   selector:
-    app: kafka
+    app: zookeeper
   type: LoadBalancer
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kafka
+      app: zookeeper
   template:
     metadata:
       labels:
-        app: kafka
+        app: zookeeper
     spec:
       containers:
         - name: zookeeper
@@ -44,9 +44,6 @@ spec:
           ports:
             - name: zk
               containerPort: 2181
-          readinessProbe:
-            httpGet:
-              path: /realms/master
-              port: 8080
+
 
 
