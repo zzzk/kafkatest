@@ -43,8 +43,6 @@ spec:
               value: "PLAINTEXT://localhost:9092"
             - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
               value: "PLAINTEXT:PLAINTEXT"
-            - name: KAFKA_METRIC_REPORTERS
-              value: "PLAINTEXT:io.confluent.metrics.reporter.ConfluentMetricsReporter"
             - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
               value: "1"
             - name: KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS
