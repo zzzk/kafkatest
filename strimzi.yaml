@@ -4,7 +4,7 @@ metadata:
   name: my-cluster
 spec:
   kafka:
-    version: 3.6.0
+    version: 3.5.2
     replicas: 3
     listeners:
       - name: plain
@@ -28,13 +28,13 @@ spec:
       - id: 0
         type: persistent-claim
         size: 20Gi
-        deleteClaim: true
+        deleteClaim: false
   zookeeper:
     replicas: 3
     storage:
       type: persistent-claim
       size: 20Gi
-      deleteClaim: true
+      deleteClaim: false
   entityOperator:
     topicOperator: {}
     userOperator: {}
